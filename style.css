@@ -36,7 +36,7 @@ color:#ff6675;
 font-weight: bold;
 }
 
-#btn {
+#btn, #deleteAll {
 background: #ff6675;
 color: white;
 border: none;
@@ -44,23 +44,18 @@ padding: 10px 15px;
 border-radius: 5px;
 }
 
-input, select{
+input, datalist{
     padding: 0.75em;
     margin:auto 1em 0.8em 1em;
     border: solid 1px#ff6675;
     border-radius: 5px;
 }
 
-input:focus, select:focus{
+input:focus, datalist:focus{
     outline: none;
     border: solid 1px#ff6675;
 }
-
-
-
-
   
-
 
 .center{
     display: flex;
