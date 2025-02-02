@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Track your monthly Expenses</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="track" class="center">
+        <h2 class="trackHeading">Spend It To Track It!</h2>
+        <form action="index.html" method="post" id="expenseForm" >
+            <label for="expName">Name</label>
+            <input type="text" name="expName" id="expName" placeholder="Where did you spend?">
+            <label for="amount">Amount</label>
+            <input type="number" name="amount" id="amount" min="1" placeholder="How Much?">
+            <label for="category">Category</label>
+            <input list="categories" id="category" name="category" placeholder="Category">
+            <datalist name="category" id="categories">
+                <option value="Clothes">Clothes</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Eating Out">Eating Out</option>
+                <option value="Transit">Transit</option>
+                <option value="Rent">Rent</option>
+                <option value="Car">Car</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Investment">Investment</option>
+                <option value="Credit">Credit</option>
+                <option value="Savings">Savings</option>
+                <option value="Other">Other</option>                
+            </datalist>
+            <label for="Date">Date</label>
+            <input type="date" name="date" id="date" class="dateInput">
+            <input id="btn" type="submit" value="Add">
+        </form>
+    </section>
+    <section id="display" class="center">
+        <h2>Track It To Spend It!</h2>
+        <table id="expTable">
+            <tr><th>Name</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>Rent</td>
+                <td>575</td>
+                <td>Rent</td>
+                <td>1-02-2025</td>
+                <td><button class="delete">Delete</button></td>
+            </tr>
+            
+
+        </table>
+    </section>
+
+    <script src="./script.js"></script>    
+    
+</body>
+</html>
