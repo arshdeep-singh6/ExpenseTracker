@@ -7,20 +7,55 @@
 body {
     background-color: rgb(247, 232, 205);
     display: grid;
+    grid-template-areas: "header header"
+    "track display";
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.25fr 1fr; 
+    padding-bottom: 1em;
+    overflow-x: hidden;
+
+}
+
+#track, #display{
+    max-width: 90%;
+}
+
+#header{
+    width:100%;
+}
+
+
+
+#header{
+    grid-area: header;
+    text-align: center;
+    margin: auto;
+    background-color: #ff6675;
+    width: 100%;
+    box-sizing: content-box;
+    padding: 2em;
+    color:rgb(247, 232, 205);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    letter-spacing: normal;
+}
+
+#header h6{
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 #track{
     font-family: "Poppins", serif;
     font-weight: 400;
     font-style: normal;
-    height: 100vh;
-    width: 50vh;
-    margin: auto;
+    margin: 2em 0 3em 0;
+    grid-area: track;
 }
 
 section h2{
     margin-bottom: 1em;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
 }
 
 
@@ -42,6 +77,13 @@ color: white;
 border: none;
 padding: 10px 15px;
 border-radius: 5px;
+}
+
+#deleteAll:hover, #btn:hover
+{
+    cursor: pointer;
+    transform: scale(1.22);
+    transition: all 0.5s ease;
 }
 
 input, datalist{
@@ -69,9 +111,142 @@ input:focus, datalist:focus{
 /* & display section styling */
 
 #display{
-    font-family: "Poppins", serif;
+    /* font-family: "Poppins", serif; */
     font-weight: 400;
     font-style: normal;
-    height: 100vh;
-    width: 50vh;
+    margin: 1em 0 2em 0;
+    grid-area: display;
+}
+
+
+table{
+    box-shadow: 0 0 25px rgba(245, 82, 136, 0.5);
+    padding: 2em;
+    background-color: #f0e6b4;
+    /* border: 2px solid #ff6675; */
+    border-radius: 10px;
+
+}
+
+
+th
+{
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #ff6675;
+}
+
+td{
+    padding: 0.45em;
+}
+
+#deleteAll{
+    margin: 1em 1em 0 1em;
+}
+
+.delete{
+    color:rgb(247, 232, 205);
+    background-color: #ff6675;
+    font-weight: 500;
+    padding: 0.35em 1.5em 0.35em 1.5em;
+    margin: 0.35em 2em 0.35em 2em;
+    border: 2px solid #ff6675;
+    border-radius: 0.2em;
+}
+
+.delete:hover{
+    color: #ff6675;
+    border:2px solid #ff6675;
+    background-color: rgb(247, 232, 205);
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+td, th{
+    padding:0em 0.5em 0 0.5em;
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 1024px){
+    body
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    input{
+        padding:0.5em;
+    }
+    #track{
+        height: max-content;
+    }
+    #display{
+        height: max-content;
+    }
+
+    #header{
+        padding: 1em 0.25em 0.25em 0.25em;
+        margin: auto;
+
+    }
+
+    table{
+        width: 90%;
+    }
+
+    
+}
+
+@media only screen and (max-width: 450px){
+ 
+
+    
+    body
+    {
+        grid-template-columns: 1fr;
+        grid-template-areas: "header"
+        "track"
+        "display";
+    }
+    #track, #display{
+        height: max-content;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    form{
+        padding: 1em;
+        max-width: 90%;
+    }
+    input{
+        padding: 0.25em;
+    }
+    
+    .delete{
+        display: block;
+        padding: 0.5em;
+        margin: 1em auto;
+    }
+
+    table{
+       max-width: 90%;
+       margin-bottom: 2em;
+    }
+    td, tr, th{
+        padding: 0.5em;
+        font-size: smaller;
+    }
+
+    
+
+    #deleteAll{
+        /* width: 20vw; */
+        /* padding: 0.25em; */
+        margin: auto;
+    }
+    
 }

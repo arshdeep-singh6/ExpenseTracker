@@ -68,7 +68,14 @@ expenseForm.addEventListener("submit", function(event){
     else
     {
         console.log("All fields are mandatory");
-        alert("All Fields are mandatory");
+        Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "All fields are mandatory!",
+            background: "#f0e6b4",
+            color: "#ff6675",
+            confirmButtonColor: "#ff4d4d",
+        });
     }
 })
 
@@ -150,7 +157,17 @@ function addExpense()
         row.appendChild(delBtn);
 
         tableBody.appendChild(row);
+        
     });
+}
+
+function calculateTotal()
+{   
+    const total = 0;
+    expenses.forEach(expense =>{
+        total += expense.expAmount;
+    })
+    return total;
 }
 
 
