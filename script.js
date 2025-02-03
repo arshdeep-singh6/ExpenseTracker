@@ -2,11 +2,16 @@ let submitBtn = document.getElementById("btn");
 let expenseForm = document.getElementById("expenseForm");
 const table = document.getElementById("expTable");
 const tableBody = document.querySelector("tbody");
-let num = 0;
 const clearAll = document.getElementById("deleteAll");
-const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+// const showTotal = document.getElementById("calcTotal");
+const total = document.getElementById("total");
+let num = localStorage.getItem("expenseCount") ? Number(localStorage.getItem("expenseCount")) : 0;
+
+
 
 expenseForm.addEventListener("submit", function(event){
+
+    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
     event.preventDefault();
     const expName = document.getElementById("expName").value;
@@ -34,36 +39,10 @@ expenseForm.addEventListener("submit", function(event){
         expenses.push(expense);
 
         localStorage.setItem("expenses", JSON.stringify(expenses));
+        localStorage.setItem("expenseCount", num);
+
         addExpense();
-
-
-    
-    /*
-    * initial approach without local storage 
-    */
-    //     const row = document.createElement("tr");
-    //     const tdName = document.createElement("td");
-    //     const tdAmount = document.createElement("td");
-    //     const tdCategory = document.createElement("td");
-    //     const tdDate = document.createElement("td");
-    //     const tdAction = document.createElement("td");
-    //     const delBtn = document.createElement("button");
-    //     delBtn.classList.add("delete");
-    //     delBtn.textContent = "Delete";
-
-    //     tdName.textContent=expName;
-    //     tdAmount.textContent=amount;
-    //     tdCategory.textContent=category;
-    //     tdDate.textContent=date;
-    //     tdAction.appendChild(delBtn);
-
-    //     row.appendChild(tdName);
-    //     row.appendChild(tdAmount);
-    //     row.appendChild(tdCategory);
-    //     row.appendChild(tdDate);
-    //     row.appendChild(delBtn);
-
-    //     tableBody.appendChild(row);
+        expenseForm.reset();
     }
     else
     {
@@ -83,19 +62,6 @@ tableBody.addEventListener("click", function(event){
     console.log("clicked");
     const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
-    /*
-    * Initial delete functionality
-    */
-    // if(event.target.classList.contains("delete"))
-    // {
-    //     const row = event.target.closest("tr");
-    //     if(row)
-    //     {
-    //         tableBody.removeChild(row);
-    //         console.log("deleted");
-    //     }
-    // }
-
     if (event.target.classList.contains("delete")) {
         console.log(expenses);
         if(expenses != [])
@@ -103,15 +69,21 @@ tableBody.addEventListener("click", function(event){
             const row = event.target.closest("tr");
             if(row)
             {
-                const expToDel = expenses.findIndex((expense) => {
-                    expense.expId === row.getAttribute("id");
-                })
-                const expIndex = expenses.indexOf(expToDel);
-                expenses.splice(expIndex, 1);
-                localStorage.setItem("expenses", JSON.stringify(expenses));
-                console.log(expenses);
-                row.remove();
-                console.log("deleted");
+                const expIndex = expenses.findIndex((expense) => 
+                    expense.expId === row.getAttribute("id"))
+
+                console.log("expense To del", expIndex);
+
+                if(expIndex !== -1)
+                {
+                    expenses.splice(expIndex, 1);
+                    localStorage.setItem("expenses", JSON.stringify(expenses));
+                    console.log(expenses);
+                    row.remove();
+                    console.log("deleted");
+                    total.textContent= calculateTotal();
+                }
+                
 
             }   
 
@@ -123,14 +95,23 @@ tableBody.addEventListener("click", function(event){
 
 function addExpense()
 {
-        tableBody.innerHTML =
-        `<tr>
-        <th>Name</th>
-        <th>Amount</th>
-        <th>Category</th>
-        <th>Date</th>
-        <th>Action</th>
-        </tr>`;
+
+    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+        tableBody.innerHTML = "";
+
+        if(expenses.length >0)
+        {
+            tableBody.innerHTML =
+            `<tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Action</th>
+            </tr>`;
+        }
+        
         expenses.forEach(expense => {
         const row = document.createElement("tr");
         const tdName = document.createElement("td");
@@ -157,13 +138,15 @@ function addExpense()
         row.appendChild(delBtn);
 
         tableBody.appendChild(row);
+        total.textContent = calculateTotal();
         
     });
 }
 
 function calculateTotal()
 {   
-    const total = 0;
+    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    let total = 0;
     expenses.forEach(expense =>{
         total += expense.expAmount;
     })
@@ -171,15 +154,16 @@ function calculateTotal()
 }
 
 
-document.addEventListener("DOMContentLoaded", addExpense());
+document.addEventListener("DOMContentLoaded", addExpense);
 
 clearAll.addEventListener("click", function(){
     const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
     expenses.length = 0;
     localStorage.removeItem("expenses");
+    localStorage.setItem("expenseCount", 0);
     console.log(expenses);
-    // location.reload();
+    total.textContent = "";
     tableBody.innerHTML =
     `<tr>
     <th>Name</th>
@@ -191,3 +175,13 @@ clearAll.addEventListener("click", function(){
 
     
 })
+
+// showTotal.addEventListener("click", function(){
+
+
+//     let totalAmount = calculateTotal(); 
+    // expenses.forEach(expense =>{
+    //     totalAmount += expense.expAmount;
+    // })
+//     total.textContent= totalAmount;
+// })

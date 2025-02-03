@@ -9,7 +9,7 @@ body {
     display: grid;
     grid-template-areas: "header header"
     "track display";
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.75fr 1fr;
     grid-template-rows: 0.25fr 1fr; 
     padding-bottom: 1em;
     overflow-x: hidden;
@@ -18,10 +18,6 @@ body {
 
 #track, #display{
     max-width: 90%;
-}
-
-#header{
-    width:100%;
 }
 
 
@@ -33,7 +29,7 @@ body {
     background-color: #ff6675;
     width: 100%;
     box-sizing: content-box;
-    padding: 2em;
+    padding: 1em;
     color:rgb(247, 232, 205);
     font-size: clamp(1rem, 2vw, 1.5rem);
     letter-spacing: normal;
@@ -114,16 +110,15 @@ input:focus, datalist:focus{
     /* font-family: "Poppins", serif; */
     font-weight: 400;
     font-style: normal;
-    margin: 1em 0 2em 0;
+    margin: 1em 0.5em 2em 0.5em;
     grid-area: display;
 }
 
 
 table{
     box-shadow: 0 0 25px rgba(245, 82, 136, 0.5);
-    padding: 2em;
+    padding: 1em;
     background-color: #f0e6b4;
-    /* border: 2px solid #ff6675; */
     border-radius: 10px;
 
 }
@@ -196,9 +191,7 @@ td, th{
 
     table{
         width: 90%;
-    }
-
-    
+    }   
 }
 
 @media only screen and (max-width: 450px){
