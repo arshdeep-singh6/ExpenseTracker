@@ -83,14 +83,9 @@ tableBody.addEventListener("click", function(event){
                     console.log("deleted");
                     total.textContent= calculateTotal();
                 }
-                
-
             }   
-
         }
     }
-
-    
 })
 
 function addExpense()
